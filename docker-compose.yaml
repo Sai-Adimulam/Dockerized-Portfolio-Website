@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+
+     flask-app-2:
+        build: .
+        image: flask-app-2-image
+        container_name: flask-app-2-container
+        ports:
+          - "4000:5000"
+        networks:
+          - flask-app-2-network
+
+     nginx-app-2:
+         image: nginx:latest
+         container_name: nginx-app-2-container
+         ports:
+           - "80:80"
+         volumes:
+           - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+         networks:
+           - flask-app-2-network
+
+
+networks:
+  flask-app-2-network:
